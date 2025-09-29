@@ -10,7 +10,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <Header />
-
       <Suspense fallback={<div>Carregando...</div>}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
