@@ -20,7 +20,10 @@ module.exports = {
         exclude: /node_modules/,
         options: { presets: ["@babel/preset-env", "@babel/preset-react"] },
       },
-      { test: /\.css$/i, use: ["style-loader", "css-loader"] },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader", "postcss-loader"],
+      },
     ],
   },
   plugins: [
@@ -28,10 +31,15 @@ module.exports = {
       name: "container",
       remotes: {
         products: "products@http://localhost:8081/remoteEntry.js",
+        cart: "cart@http://localhost:8082/remoteEntry.js",
       },
       shared: {
         react: { singleton: true },
         "react-dom": { singleton: true },
+        "react-icons": {
+          singleton: true,
+          requiredVersion: deps["react-icons"],
+        },
       },
     }),
     new HtmlWebpackPlugin({ template: "./public/index.html" }),
